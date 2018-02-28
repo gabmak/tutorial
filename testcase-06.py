@@ -63,7 +63,11 @@ class Calculator:
 
 
     def findCharageableIncome(income, MPF, allowance):
-        lessMPF = float(income) * float(MPF)
+        if float(income) * float(MPF) > 15000:
+            lessMPF = 15000
+        else:
+            lessMPF = float(income) * float(MPF)
+
         netTotalIncome = float(income) - float(lessMPF)
         if netTotalIncome-allowance <= 0:
             return 0
