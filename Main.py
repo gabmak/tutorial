@@ -1,10 +1,3 @@
-#Group Member:
-# Mak Hoi Yiu Gabriel
-# LEONG Ming Yin Henry
-# Wong Tin Wing Tommy
-
-import unittest
-
 class Calculator:
 
     def findClass(income):
@@ -21,7 +14,6 @@ class Calculator:
         else:
             return
 
-
     def calculateSingle(income, taxClass):
         if taxClass == 'no':
             return 0
@@ -29,7 +21,7 @@ class Calculator:
             subTotal = Calculator.multipleCal(income, 0.02)
             return subTotal
         elif taxClass == 'second':
-            remainder = Calculator.checkRemainder(income,45000)
+            remainder = Calculator.checkRemainder(income, 45000)
             subTotal = 900 + Calculator.multipleCal(remainder, 0.07)
             return subTotal
         elif taxClass == 'third':
@@ -41,7 +33,6 @@ class Calculator:
             subTotal = 900 + 3150 + 5400 + Calculator.multipleCal(remainder, 0.17)
             return subTotal
 
-
     def taxReduction (subtotal):
         subtotal = float(subtotal)
         if subtotal * 0.75 >= 20000:
@@ -49,18 +40,15 @@ class Calculator:
         else:
             return subtotal * 0.75
 
-
     def checkRemainder(value, ceiling):
         if value == ceiling:
             return ceiling
         else:
             return value - ceiling
 
-
     def multipleCal(amount, percentage):
         returnValue = amount * percentage
         return returnValue
-
 
     def findCharageableIncome(income, MPF, allowance):
         if float(income) * float(MPF) > 15000:
@@ -74,7 +62,6 @@ class Calculator:
         else:
             return netTotalIncome-allowance
 
-
     def processTax(income):
         classValue = Calculator.findClass(income)
         subTotal = Calculator.calculateSingle(income, classValue)
@@ -83,7 +70,6 @@ class Calculator:
         print(classValue)
         print(taxPayable)
         return taxPayable
-
 
     #Main
     def mainProgram(firstPerson, secondPerson):
@@ -107,8 +93,8 @@ class Calculator:
             print("individual: ",  individualTotal)
             print("combine: ", combineTotalTax)
             if combineTotalTax < individualTotal:
-                print("Combine")
-                return "Use combine"
+                print("Joint")
+                return "Use joint"
             elif combineTotalTax == individualTotal:
                 print("Same")
                 return 'Same!'
@@ -118,30 +104,3 @@ class Calculator:
         else:
             print('Error')
             return 'Error'
-
-
-class CalculatorTest(unittest.TestCase):
-
-    def test_tax_with_same(self):
-        #correct
-        cal = Calculator
-        self.assertEqual((cal.mainProgram(30, 30)), "Same!")
-
-    def test_tax_with_combine(self):
-        # correct
-        cal = Calculator
-        self.assertEqual((cal.mainProgram(300000, 108000)), "Use combine")
-
-    def test_tax_with_individual(self):
-        # correct
-        cal = Calculator
-        self.assertEqual((cal.mainProgram(300000000, 300000000)), "Use individual")
-
-    def test_error(self):
-        #error
-        cal = Calculator
-        self.assertEqual((cal.mainProgram(300000, 108000)), "Same!")
-
-
-if __name__ == '__main__':
-    unittest.main()
